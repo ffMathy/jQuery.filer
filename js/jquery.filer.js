@@ -40,13 +40,18 @@
                             }
                         });
                         if (n.dragDrop) {
-                            o.on("drag dragstart dragend dragover dragenter dragleave drop", function(e) {
+                            var dragDropContainer = o;
+                            if (n.dragDrop.container) {
+                                dragDropContainer = n.dragDrop.container;
+                            }
+
+                            dragDropContainer.on("drag dragstart dragend dragover dragenter dragleave drop", function (e) {
                                 e.preventDefault();
                                 e.stopPropagation();
                             });
-                            o.on("drop", f._dragDrop.drop);
-                            o.on("dragover", f._dragDrop.dragEnter);
-                            o.on("dragleave", f._dragDrop.dragLeave);
+                            dragDropContainer.on("drop", f._dragDrop.drop);
+                            dragDropContainer.on("dragover", f._dragDrop.dragEnter);
+                            dragDropContainer.on("dragleave", f._dragDrop.dragLeave);
                         }
                         if (n.uploadFile && n.clipBoardPaste) {
                             $(window)
@@ -1000,7 +1005,12 @@
         },
         files: null,
         uploadFile: null,
-        dragDrop: null,
+        dragDrop: {
+            dragEnter: null,
+            dragLeave: null,
+            drop: null,
+            containerSelector: null
+        },
         addMore: false,
         clipBoardPaste: true,
         excludeName: null,

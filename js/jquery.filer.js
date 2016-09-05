@@ -1009,7 +1009,7 @@
             dragEnter: null,
             dragLeave: null,
             drop: null,
-            containerSelector: null
+            container: null
         },
         addMore: false,
         clipBoardPaste: true,
